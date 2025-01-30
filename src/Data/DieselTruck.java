@@ -7,6 +7,13 @@ public class DieselTruck extends Truck{
     DieselTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double fuelCapacity) {
         super(make, model, yearOfProduction, maximumWeightCapacity);
         this.fuelCapacity = fuelCapacity;
+        this.setPlateNumber(generatePlateNumber());
+    }
+
+    DieselTruck(DieselTruck dieselTruck){
+        super(dieselTruck.getMake(), dieselTruck.getModel(), dieselTruck.getYearOfProduction(), dieselTruck.getMaximumWeightCapacity());
+        this.fuelCapacity = dieselTruck.getFuelCapacity();
+        this.setPlateNumber(generatePlateNumber());
     }
 
     public double getFuelCapacity() {
