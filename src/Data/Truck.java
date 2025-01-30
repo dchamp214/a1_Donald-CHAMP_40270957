@@ -9,4 +9,12 @@ public class Truck extends Vehicle {
         super(make, model, yearOfProduction);
         this.maximumWeightCapacity = maximumWeightCapacity;
     }
+
+    public double getMaximumWeightCapacity() {
+        return maximumWeightCapacity;
+    }
+
+    public void setMaximumWeightCapacity(double maximumWeightCapacity){
+        this.maximumWeightCapacity = maximumWeightCapacity;
+    }
 }

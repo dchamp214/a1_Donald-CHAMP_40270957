@@ -9,4 +9,12 @@ public class Car extends Vehicle {
         super(make, model, yearOfProduction);
         this.maximumPassengers = maximumPassengers;
     }
+
+    public int getMaximumPassengers(){
+        return maximumPassengers;
+    }
+
+    public void setMaximumPassengers(int maximumPassengers) {
+        this.maximumPassengers = maximumPassengers;
+    }
 }
