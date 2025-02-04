@@ -36,7 +36,7 @@ public class Main {
 
                     switch (vehicleOperationChoice){
                         case 1:
-                            System.out.print("Which ");
+                            System.out.print("Which car");
                             break;
                         case 2:
                             break;
