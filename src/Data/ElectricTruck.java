@@ -4,6 +4,12 @@ public class ElectricTruck extends Truck{
     private double maximumRange;
     private static int ElectricTruckCount = 1000;
 
+    ElectricTruck(){
+        super();
+        this.maximumRange = 0;
+        this.setPlateNumber(generatePlateNumber());
+    }
+
     ElectricTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double maximumRange) {
         super(make, model, yearOfProduction, maximumWeightCapacity);
         this.maximumRange = maximumRange;

@@ -6,6 +6,12 @@ public class Vehicle {
     private String model;
     private int yearOfProduction;
 
+    Vehicle(){
+        this.make = "Unknown";
+        this.model = "Unknown";
+        this.yearOfProduction = 0;
+    }
+
     Vehicle(String make, String model, int yearOfProduction){
         this.make = make;
         this.model = model;

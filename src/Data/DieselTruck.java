@@ -4,6 +4,12 @@ public class DieselTruck extends Truck{
     private double fuelCapacity;
     private static int DieselTruckCount = 1000;
 
+    DieselTruck(){
+        super();
+        this.fuelCapacity = 0;
+        this.setPlateNumber(generatePlateNumber());
+    }
+
     DieselTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double fuelCapacity) {
         super(make, model, yearOfProduction, maximumWeightCapacity);
         this.fuelCapacity = fuelCapacity;

@@ -3,6 +3,13 @@ package Data;
 public class ElectricCar extends Car{
     private double maximumRange;
     private int ElectricCarCount = 1000;
+
+    ElectricCar(){
+        super();
+        this.maximumRange = 0;
+        this.setPlateNumber(generatePlateNumber());
+    }
+
     ElectricCar(String make, String model, int yearOfProduction, int maximumPassengers, double maximumRange) {
         super(make, model, yearOfProduction, maximumPassengers);
         this.maximumRange = maximumRange;
