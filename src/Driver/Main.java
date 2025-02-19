@@ -7,13 +7,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-
         System.out.print("Welcome to the RoyalRentals management software!");
 
-        DieselTruck[] dieselTrucks = new DieselTruck[0];
-        ElectricTruck[] electricTrucks = new ElectricTruck[0];
-        GasolineCar[] gasolineCars = new GasolineCar[0];
-        ElectricCar[] electricCars = new ElectricCar[0];
+        Vehicle[] vehicles = new Vehicle[100];
+        int vehicleCount = 0;
+
 
         do{
             System.out.print("\nWhat type of operation do you wish to perform?\n");
@@ -36,7 +34,61 @@ public class Main {
 
                     switch (vehicleOperationChoice){
                         case 1:
-                            System.out.print("Which car");
+                            System.out.print("Which type of vehicle would you like to add?\n");
+                            System.out.print("\t1. Electric Truck\n");
+                            System.out.print("\t2. Diesel Truck\n");
+                            System.out.print("\t3. Electric Car\n");
+                            System.out.print("\t4. Gasoline Car\n -->");
+
+                            int vehicleTypeChoice = input.nextInt();
+                            input.nextLine();  // Consume newline
+
+                            System.out.print("Enter Make: ");
+                            String make = input.nextLine();
+
+                            System.out.print("Enter Model: ");
+                            String model = input.nextLine();
+
+                            System.out.print("Enter Year of Production: ");
+                            int yearOfProduction = input.nextInt();
+
+                            Vehicle newVehicle = new Vehicle();
+
+                            switch(vehicleTypeChoice) {
+                                case 1: // Electric Truck
+                                    System.out.print("Enter Maximum Capacity (kg): ");
+                                    int maxCapacityET = input.nextInt();
+                                    System.out.print("Enter Maximum Autonomy Range (km): ");
+                                    int maxRangeET = input.nextInt();
+                                    newVehicle = new ElectricTruck(make, model, yearOfProduction,maxCapacityET, maxRangeET);
+                                    break;
+                                case 2: // Diesel Truck
+                                    System.out.print("Enter Maximum Capacity (kg): ");
+                                    int maxCapacityDT = input.nextInt();
+                                    System.out.print("Enter Fuel Tank Capacity (liters): ");
+                                    int fuelTankCapacityDT = input.nextInt();
+                                    newVehicle = new DieselTruck(make, model, yearOfProduction, maxCapacityDT, fuelTankCapacityDT);
+                                    break;
+                                case 3: // Electric Car
+                                    System.out.print("Enter Maximum Number of Passengers: ");
+                                    int maxPassengersEC = input.nextInt();
+                                    System.out.print("Enter Maximum Autonomy Range (km): ");
+                                    int maxRangeEC = input.nextInt();
+                                    newVehicle = new ElectricCar(make, model, yearOfProduction, maxPassengersEC, maxRangeEC);
+                                    break;
+                                case 4: // Gasoline Car
+                                    System.out.print("Enter Maximum Number of Passengers: ");
+                                    int maxPassengersGC = input.nextInt();
+                                    newVehicle = new GasolineCar(make, model, yearOfProduction, maxPassengersGC);
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice, vehicle not added.");
+                                    return; // Exit without adding a vehicle if invalid input
+                            }
+
+                            vehicles[vehicleCount++] = newVehicle;
+
+
                             break;
                         case 2:
                             break;
@@ -50,10 +102,73 @@ public class Main {
                     }
                     break;
                 case 2:
+
+                    System.out.print("Which Client Management operation do you wish to use\n");
+                    System.out.print("\t1. Add a client\n");
+                    System.out.print("\t2. Edit a client\n");
+                    System.out.print("\t3. Delete a client\n -->");
+
+                    int clientOperationChoice = input.nextInt();
+
+                    switch(clientOperationChoice){
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            System.out.print("\nYou have made an invalid choice. Please try again");
+                            break;
+                    }
                     break;
                 case 3:
+                    System.out.print("Which Leasing Operation do you wish to use\n");
+                    System.out.print("\t1. Lease a vehicle to a client\n");
+                    System.out.print("\t2. Return a vehicle from a client\n");
+                    System.out.print("\t3. Show all vehicles leased by a client\n");
+                    System.out.print("\t4. Show all leased vehicles (by all clients)\n -->");
+
+                    int leasingOperationChoice = input.nextInt();
+
+                    switch(leasingOperationChoice){
+                        case 1:
+                            // Logic for leasing a vehicle to a client
+                            break;
+                        case 2:
+                            // Logic for returning a vehicle from a client
+                            break;
+                        case 3:
+                            // Logic for showing all vehicles leased by a client
+                            break;
+                        case 4:
+                            // Logic for showing all leased vehicles (by all clients)
+                            break;
+                        default:
+                            System.out.print("\nYou have made an invalid choice. Please try again");
+                            break;
+                    }
+
                     break;
                 case 4:
+                    System.out.print("Which Additional Operation do you wish to use\n");
+                    System.out.print("\t1. Display the truck with the largest capacity\n");
+                    System.out.print("\t2. Create a copy of the electric trucks array\n -->");
+
+                    int additionalOperationChoice = input.nextInt();
+
+                    switch(additionalOperationChoice){
+                        case 1:
+                            // Logic for displaying the truck with the largest capacity
+                            break;
+                        case 2:
+                            // Logic for creating a copy of the electric trucks array
+                            break;
+                        default:
+                            System.out.print("\nYou have made an invalid choice. Please try again");
+                            break;
+                    }
+
                     break;
                 default:
                     System.out.print("\nYou have made an invalid choice. Please try again");

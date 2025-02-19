@@ -6,7 +6,7 @@ public class Vehicle {
     private String model;
     private int yearOfProduction;
 
-    Vehicle(){
+    public Vehicle(){
         this.make = "Unknown";
         this.model = "Unknown";
         this.yearOfProduction = 0;

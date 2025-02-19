@@ -8,7 +8,7 @@ public class GasolineCar extends Car{
         this.setPlateNumber(generatePlateNumber());
     }
 
-    GasolineCar(String make, String model, int yearOfProduction, int maximumPassengers) {
+    public GasolineCar(String make, String model, int yearOfProduction, int maximumPassengers) {
         super(make, model, yearOfProduction, maximumPassengers);
         this.setPlateNumber(generatePlateNumber());
     }

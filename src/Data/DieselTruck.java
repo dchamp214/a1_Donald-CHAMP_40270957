@@ -10,7 +10,7 @@ public class DieselTruck extends Truck{
         this.setPlateNumber(generatePlateNumber());
     }
 
-    DieselTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double fuelCapacity) {
+    public DieselTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double fuelCapacity) {
         super(make, model, yearOfProduction, maximumWeightCapacity);
         this.fuelCapacity = fuelCapacity;
         this.setPlateNumber(generatePlateNumber());

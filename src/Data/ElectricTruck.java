@@ -10,7 +10,7 @@ public class ElectricTruck extends Truck{
         this.setPlateNumber(generatePlateNumber());
     }
 
-    ElectricTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double maximumRange) {
+    public ElectricTruck(String make, String model, int yearOfProduction, double maximumWeightCapacity, double maximumRange) {
         super(make, model, yearOfProduction, maximumWeightCapacity);
         this.maximumRange = maximumRange;
         this.setPlateNumber(generatePlateNumber());
