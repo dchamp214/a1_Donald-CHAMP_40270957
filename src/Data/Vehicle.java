@@ -50,4 +50,20 @@ public class Vehicle {
         this.yearOfProduction = yearOfProduction;
     }
 
+    @Override
+    public String toString() {
+        return "\tMake: " + make + "\n\tModel: " + model + "\n\tYear of Production: " + yearOfProduction
+                + "\n\tPlate Number: " + plateNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Vehicle){
+            return ((Vehicle) obj).getMake().equals(this.make) && ((Vehicle) obj).getModel().equals(this.model)
+                    && ((Vehicle) obj).getYearOfProduction() == this.yearOfProduction;
+        }
+        else{
+            return false;
+        }
+    }
 }

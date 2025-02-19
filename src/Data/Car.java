@@ -22,4 +22,14 @@ public class Car extends Vehicle {
     public void setMaximumPassengers(int maximumPassengers) {
         this.maximumPassengers = maximumPassengers;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Car){
+            return super.equals(obj) && ((Car) obj).getMaximumPassengers() == this.maximumPassengers;
+        }
+        else{
+            return false;
+        }
+    }
 }

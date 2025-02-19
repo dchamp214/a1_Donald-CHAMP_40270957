@@ -22,4 +22,14 @@ public class GasolineCar extends Car{
         GasolineCarCount++;
         return "GC" + GasolineCarCount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof GasolineCar) {
+            return super.equals(obj);
+        }
+        else{
+            return false;
+        }
+    }
 }

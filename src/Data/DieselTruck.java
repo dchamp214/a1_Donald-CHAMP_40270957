@@ -34,4 +34,14 @@ public class DieselTruck extends Truck{
         DieselTruckCount++;
         return "DT" + DieselTruckCount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof DieselTruck){
+            return super.equals(obj) && ((DieselTruck) obj).getFuelCapacity() == this.fuelCapacity;
+        }
+        else{
+            return false;
+        }
+    }
 }

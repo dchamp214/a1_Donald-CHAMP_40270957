@@ -34,4 +34,14 @@ public class ElectricCar extends Car{
         ElectricCarCount++;
         return "EC" + ElectricCarCount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof ElectricCar){
+            return super.equals(obj) && ((ElectricCar) obj).getMaximumRange() == this.maximumRange;
+        }
+        else{
+            return false;
+        }
+    }
 }

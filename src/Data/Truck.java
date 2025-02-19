@@ -22,4 +22,14 @@ public class Truck extends Vehicle {
     public void setMaximumWeightCapacity(double maximumWeightCapacity){
         this.maximumWeightCapacity = maximumWeightCapacity;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Truck){
+            return super.equals(obj) && ((Truck) obj).getMaximumWeightCapacity() == this.maximumWeightCapacity;
+        }
+        else{
+            return false;
+        }
+    }
 }

@@ -43,6 +43,11 @@ public class Main {
                             int vehicleTypeChoice = input.nextInt();
                             input.nextLine();  // Consume newline
 
+                            if(vehicleTypeChoice != 1 && vehicleTypeChoice != 2 && vehicleTypeChoice != 3 && vehicleTypeChoice != 4){
+                                System.out.print("Invalid Input!");
+                                break;
+                            }
+
                             System.out.print("Enter Make: ");
                             String make = input.nextLine();
 
@@ -81,18 +86,40 @@ public class Main {
                                     int maxPassengersGC = input.nextInt();
                                     newVehicle = new GasolineCar(make, model, yearOfProduction, maxPassengersGC);
                                     break;
-                                default:
-                                    System.out.println("Invalid choice, vehicle not added.");
-                                    return; // Exit without adding a vehicle if invalid input
                             }
-
                             vehicles[vehicleCount++] = newVehicle;
-
-
                             break;
                         case 2:
+                            System.out.print("\nHere are all you vehicles:\n");
+
+                            for(int i = 0; i < vehicleCount; i++){
+                                System.out.print("Vehicle " + (i+1) + vehicles[i] + "\n");
+                            }
+
+                            System.out.print("\nWhich vehicle would you like to remove -->");
+                            int removedVehicle = input.nextInt();
+
+                            if(removedVehicle < 0 || removedVehicle > vehicleCount){
+                                System.out.print("\nInvalid input!");
+                                break;
+                            }
+
+                            Vehicle[] heldVehicles = new Vehicle[vehicleCount];
+                            System.arraycopy(vehicles, 0, heldVehicles, 0, vehicleCount);
+
+                            for (int i = 0; i < vehicleCount; i++) {
+                                if (i == (removedVehicle - 1)) {
+                                    for (int j = i; j < vehicleCount - 1; j++) {
+                                        vehicles[j] = heldVehicles[j + 1];
+                                    }
+                                }
+                            }
+
+                            vehicles[vehicleCount - 1] = null;
+                            vehicleCount--;
                             break;
                         case 3:
+
                             break;
                         case 4:
                             break;
