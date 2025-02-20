@@ -1,5 +1,7 @@
 package Data;
 
+import java.util.Scanner;
+
 public class DieselTruck extends Truck{
     private double fuelCapacity;
     private static int DieselTruckCount = 1000;
@@ -42,6 +44,24 @@ public class DieselTruck extends Truck{
         }
         else{
             return false;
+        }
+    }
+
+    public int editInformation(Scanner input){
+        System.out.print("\t4. Maximum Weight Capacity: " + getMaximumWeightCapacity() + "kg\n");
+        System.out.print("\t5. Fuel Capacity: " + this.fuelCapacity + "L\n");
+        System.out.print("--->");
+        int editChoice = input.nextInt();
+        if (editChoice == 4){
+            System.out.print("Enter the new Maximum Weight Capacity (in kg): ");
+            setMaximumWeightCapacity(input.nextDouble());
+            return 0;
+        } else if (editChoice == 5) {
+            System.out.print("Enter new Fuel Capacity (in litres): ");
+            setFuelCapacity(input.nextDouble());
+            return 0;
+        } else{
+            return editChoice;
         }
     }
 }

@@ -1,5 +1,7 @@
 package Data;
 
+import java.util.Scanner;
+
 public class Vehicle {
     private String plateNumber;
     private String make;
@@ -52,7 +54,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "\tMake: " + make + "\n\tModel: " + model + "\n\tYear of Production: " + yearOfProduction
+        return "\n\tMake: " + make + "\n\tModel: " + model + "\n\tYear of Production: " + yearOfProduction
                 + "\n\tPlate Number: " + plateNumber;
     }
 
@@ -65,5 +67,9 @@ public class Vehicle {
         else{
             return false;
         }
+    }
+
+    public int editInformation(Scanner input){
+        return 0;
     }
 }

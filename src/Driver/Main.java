@@ -1,6 +1,8 @@
 package Driver;
 
+
 import Data.*;
+import Client.*;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +18,7 @@ public class Main {
         do{
             System.out.print("\nWhat type of operation do you wish to perform?\n");
             System.out.print("\t1. Vehicle Management\n");
-            System.out.print("\t2. Client Management\n");
+            System.out.print("\t2. Client.Client Management\n");
             System.out.print("\t3. Leasing Operations\n");
             System.out.print("\t4. Additional Operations\n -->");
 
@@ -119,9 +121,70 @@ public class Main {
                             vehicleCount--;
                             break;
                         case 3:
+                            System.out.print("\nHere are all you vehicles:\n");
 
+                            for(int i = 0; i < vehicleCount; i++){
+                                System.out.print("Vehicle " + (i+1) + vehicles[i] + "\n");
+                            }
+
+                            System.out.print("\nWhich vehicle would you like to edit -->");
+                            int changedVehicle = input.nextInt();
+
+                            if(changedVehicle <= 0 || changedVehicle > vehicleCount){
+                                System.out.print("\nInvalid input!");
+                                break;
+                            }
+
+                            changedVehicle--;
+
+                            System.out.print("\nWhich attribute would you like to edit?\n");
+                            System.out.print("\t1. Make\n");
+                            System.out.print("\t2. Model\n");
+                            System.out.print("\t3. Year of Production\n");
+                            int changedAttribute = vehicles[changedVehicle].editInformation(input);
+
+                            if(changedAttribute == 1){
+                                System.out.print("\nEnter your new make: ");
+                                vehicles[changedVehicle].setMake(input.next());
+                                input.nextLine();
+                            } else if (changedAttribute == 2){
+                                System.out.print("\nEnter your new model: ");
+                                vehicles[changedVehicle].setModel(input.next());
+                                input.nextLine();
+                            } else if (changedAttribute == 3) {
+                                System.out.print("\nEnter your new year of production: ");
+                                vehicles[changedVehicle].setYearOfProduction(input.nextInt());
+                            }
+                            System.out.print("\nAttribute updates successfully!");
                             break;
                         case 4:
+                            System.out.print("All Diesel Trucks:");
+                            for(int i = 0; i < vehicleCount; i++){
+                                if(vehicles[i] instanceof DieselTruck){
+                                    System.out.print(vehicles[i] + "\n");
+                                }
+                            }
+
+                            System.out.print("\nAll Electric Trucks:");
+                            for(int i = 0; i < vehicleCount; i++){
+                                if(vehicles[i] instanceof ElectricTruck){
+                                    System.out.print(vehicles[i] + "\n");
+                                }
+                            }
+
+                            System.out.print("\nAll Gasoline Cars:");
+                            for(int i = 0; i < vehicleCount; i++){
+                                if(vehicles[i] instanceof GasolineCar){
+                                    System.out.print(vehicles[i] + "\n");
+                                }
+                            }
+
+                            System.out.print("\nAll Electric Cars:");
+                            for(int i = 0; i < vehicleCount; i++){
+                                if(vehicles[i] instanceof ElectricCar){
+                                    System.out.print(vehicles[i] + "\n");
+                                }
+                            }
                             break;
                         default:
                             System.out.print("\nYou have made an invalid choice. Please try again");
@@ -130,7 +193,7 @@ public class Main {
                     break;
                 case 2:
 
-                    System.out.print("Which Client Management operation do you wish to use\n");
+                    System.out.print("Which Client.Client Management operation do you wish to use\n");
                     System.out.print("\t1. Add a client\n");
                     System.out.print("\t2. Edit a client\n");
                     System.out.print("\t3. Delete a client\n -->");

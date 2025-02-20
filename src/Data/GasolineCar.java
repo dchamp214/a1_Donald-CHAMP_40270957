@@ -1,5 +1,7 @@
 package Data;
 
+import java.util.Scanner;
+
 public class GasolineCar extends Car{
     private int GasolineCarCount = 1000;
 
@@ -30,6 +32,20 @@ public class GasolineCar extends Car{
         }
         else{
             return false;
+        }
+    }
+
+    public int editInformation(Scanner input){
+        System.out.print("\t4. Maximum Weight Capacity: " + getMaximumPassengers() + "\n");
+        System.out.print("--->");
+        int editChoice = input.nextInt();
+        if (editChoice == 4) {
+            System.out.print("Enter the new Maximum Passengers: ");
+            setMaximumPassengers(input.nextInt());
+            return 0;
+        }
+        else{
+            return editChoice;
         }
     }
 }
