@@ -12,13 +12,15 @@ public class Main {
         System.out.print("Welcome to the RoyalRentals management software!");
 
         Vehicle[] vehicles = new Vehicle[100];
+        Client[] clients = new Client[100];
         int vehicleCount = 0;
+        int clientCount = 0;
 
 
         do{
             System.out.print("\nWhat type of operation do you wish to perform?\n");
             System.out.print("\t1. Vehicle Management\n");
-            System.out.print("\t2. Client.Client Management\n");
+            System.out.print("\t2. Client Management\n");
             System.out.print("\t3. Leasing Operations\n");
             System.out.print("\t4. Additional Operations\n -->");
 
@@ -193,7 +195,7 @@ public class Main {
                     break;
                 case 2:
 
-                    System.out.print("Which Client.Client Management operation do you wish to use\n");
+                    System.out.print("Which Client Management operation do you wish to use\n");
                     System.out.print("\t1. Add a client\n");
                     System.out.print("\t2. Edit a client\n");
                     System.out.print("\t3. Delete a client\n -->");
@@ -202,10 +204,43 @@ public class Main {
 
                     switch(clientOperationChoice){
                         case 1:
+                            System.out.print("Enter the name of new client: ");
+                            clients[clientCount] = new Client(input.next());
+                            input.nextLine();
+                            System.out.print("Client successfully created!\nNew Clients ID: " +
+                                    clients[clientCount].getClientID());
+                            clientCount++;
                             break;
                         case 2:
+                            System.out.print("Please see all clients below\n");
+                            for(int i = 0; i < clientCount; i++){
+                                System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
+                            }
+                            System.out.print("Please enter the client number of the client you wish to edit\n");
+                            System.out.print("-->");
+                            int editedClient = input.nextInt() - 1;
+                            System.out.print("Enter client ID " + clients[editedClient].getClientID() +
+                                    " new client name\n");
+                            System.out.print("-->");
+                            clients[editedClient].setClientName(input.next());
+                            input.nextLine();
+                            System.out.print("Name Successfully Updated!\n");
                             break;
                         case 3:
+                            System.out.print("Please see all clients below\n");
+                            for(int i = 0; i < clientCount; i++){
+                                System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
+                            }
+                            System.out.print("Please enter the client number of the client you wish to remove\n");
+                            System.out.print("-->");
+                            int removedClient = input.nextInt() - 1;
+                            clients[removedClient] = null;
+                            for(int i = removedClient; i < clientCount - 1; i++){
+                                clients[i] = new Client(clients[i + 1]);
+                            }
+                            clients[clientCount - 1] = null;
+                            clientCount--;
+                            System.out.print("\nClient Successfully Removed!");
                             break;
                         default:
                             System.out.print("\nYou have made an invalid choice. Please try again");
@@ -223,16 +258,86 @@ public class Main {
 
                     switch(leasingOperationChoice){
                         case 1:
-                            // Logic for leasing a vehicle to a client
+                            System.out.print("\nHere are all your unleased vehicles:\n");
+
+                            for(int i = 0; i < vehicleCount; i++){
+                                if(vehicles[i].isLeased() == false){
+                                    System.out.print("Vehicle " + (i+1) + vehicles[i] + "\n");
+                                }
+                            }
+
+                            System.out.print("Which vehicle do you want to lease?\n-->");
+                            int leasedVehicle = input.nextInt() - 1;
+
+                            if(leasedVehicle >= vehicleCount || leasedVehicle < 0){
+                                System.out.print("\nVehicle does not exist");
+                                break;
+                            }
+
+                            if(vehicles[leasedVehicle].isLeased()){
+                                System.out.print("\nThis vehicle has already been leased");
+                            }
+
+                            System.out.print("Please see all clients below\n");
+                            for(int i = 0; i < clientCount; i++){
+                                System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
+                            }
+
+                            System.out.print("Enter the number of the client you wish to lease to\n-->");
+                            int leaserClient = input.nextInt() - 1;
+
+                            if(leaserClient >= clientCount || leaserClient < 0){
+                                System.out.print("\nClient does not exist");
+                                break;
+                            }
+
+                            clients[leaserClient].addVehicle(vehicles[leasedVehicle]);
+                            vehicles[leasedVehicle].setLeased(true);
+                            System.out.print("\nVehicle Successfully Leased!");
                             break;
                         case 2:
-                            // Logic for returning a vehicle from a client
+                            System.out.print("Please see all clients below\n");
+                            for(int i = 0; i < clientCount; i++){
+                                System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
+                            }
+                            System.out.print("Which client wants to return a vehicle\n-->");
+                            int returningClient = input.nextInt() - 1;
+
+                            if(returningClient >= clientCount || returningClient < 0){
+                                System.out.print("\nClient does not exist");
+                                break;
+                            }
+
+                            if(clients[returningClient].getClientVehicleCount() == 0){
+                                System.out.print("\nThis client has no vehicles leased");
+                                break;
+                            }
+
+                            System.out.print(clients[returningClient].clientVehiclesList(vehicles, vehicleCount));
+                            System.out.print("\nEnter the vehicle number that you wish to remove\n-->");
+                            int returnedVehicle = input.nextInt() - 1;
+                            clients[returningClient].removeVehicle(returnedVehicle);
+                            vehicles[returnedVehicle].setLeased(false);
                             break;
                         case 3:
-                            // Logic for showing all vehicles leased by a client
+                            System.out.print("Please see all clients below\n");
+                            for(int i = 0; i < clientCount; i++){
+                                System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
+                            }
+
+                            System.out.print("Which client's vehicles do you wish to view\n-->");
+                            int viewedClient = input.nextInt() - 1;
+
+                            System.out.print(clients[viewedClient].clientVehiclesList(vehicles, vehicleCount));
                             break;
                         case 4:
-                            // Logic for showing all leased vehicles (by all clients)
+                            for(int i = 0; i < vehicleCount; i++){
+                                if(vehicles[i].isLeased()){
+                                    for(int j = 0; j < clientCount; j++){
+                                        clients[j].isLeasedByClient(vehicles[i]);
+                                    }
+                                }
+                            }
                             break;
                         default:
                             System.out.print("\nYou have made an invalid choice. Please try again");

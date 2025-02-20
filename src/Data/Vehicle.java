@@ -7,17 +7,20 @@ public class Vehicle {
     private String make;
     private String model;
     private int yearOfProduction;
+    private boolean isLeased;
 
     public Vehicle(){
         this.make = "Unknown";
         this.model = "Unknown";
         this.yearOfProduction = 0;
+        isLeased = false;
     }
 
     Vehicle(String make, String model, int yearOfProduction){
         this.make = make;
         this.model = model;
         this.yearOfProduction = yearOfProduction;
+        isLeased = false;
     }
 
     public String getPlateNumber() {
@@ -36,6 +39,10 @@ public class Vehicle {
         return yearOfProduction;
     }
 
+    public boolean isLeased() {
+        return isLeased;
+    }
+
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
     }
@@ -52,10 +59,14 @@ public class Vehicle {
         this.yearOfProduction = yearOfProduction;
     }
 
+    public void setLeased(boolean leased) {
+        isLeased = leased;
+    }
+
     @Override
     public String toString() {
         return "\n\tMake: " + make + "\n\tModel: " + model + "\n\tYear of Production: " + yearOfProduction
-                + "\n\tPlate Number: " + plateNumber;
+                + "\n\tPlate Number: " + plateNumber + "\n\tIs Leased: " + isLeased;
     }
 
     @Override

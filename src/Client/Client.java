@@ -8,11 +8,11 @@ public class Client {
     private int clientID;
 
     private int clientVehicleCount;
-    static  int clientCount = 0;
+    static  int clientCount = 1;
 
 
 
-    Client(){
+    public Client(){
         clientName = "Unknown";
         clientVehicles = new String[100];
         clientVehicleCount = 0;
@@ -20,12 +20,21 @@ public class Client {
         clientCount++;
     }
 
-    Client(String clientName){
+    public Client(String clientName){
         this.clientName = clientName;
         clientVehicles = new String[100];
         clientVehicleCount = 0;
         clientID = 1000 + clientCount;
         clientCount++;
+    }
+
+    public Client(Client copiedClient){
+        this.clientName = copiedClient.getClientName();
+        this.clientID = copiedClient.getClientID();
+        this.clientVehicles = new String[copiedClient.clientVehicles.length];
+        System.arraycopy(copiedClient.clientVehicles, 0, this.clientVehicles,
+                0, copiedClient.clientVehicles.length);
+        this.clientVehicleCount = copiedClient.getClientVehicleCount();
     }
 
     public String getClientName() {
@@ -57,12 +66,12 @@ public class Client {
         return "Client Name: " + clientName + "\nClient ID: " + clientID + "\nNumber of Leased Vehicles: " + clientVehicleCount;
     }
 
-    public String clientVehiclesList(Vehicle[] vehicles) {
-        String returnedString = this.clientName + "'s Vehicles";
-        for (int i = 0; i < vehicles.length; i++){
+    public String clientVehiclesList(Vehicle[] vehicles, int vehicleCount) {
+        String returnedString = this.clientName + "'s Vehicles\n";
+        for (int i = 0; i < vehicleCount; i++){
             for(int j = 0; j < clientVehicleCount; j++) {
-                if(vehicles[i].getPlateNumber() == clientVehicles[j]){
-                    returnedString = returnedString + "Vehicle " + (j+1) + ":" + vehicles[i];
+                if(vehicles[i].getPlateNumber().equals(clientVehicles[j])){
+                    returnedString = returnedString + "Vehicle " + (j+1) + ":" + vehicles[i] + "\n";
                 }
             }
         }
@@ -75,10 +84,24 @@ public class Client {
     }
 
     public void removeVehicle(int index){
-        for(int i = index; i < clientVehicleCount; i++){
-            clientVehicles[i] = clientVehicles[i+1];
+        if(index < clientVehicleCount && index > -1){
+            for(int i = index; i < clientVehicleCount; i++){
+                clientVehicles[i] = clientVehicles[i+1];
+            }
+            clientVehicleCount--;
+            System.out.print("\nVehicle Successfully Returned!\n");
         }
-        clientVehicleCount--;
+        else{
+            System.out.print("\nVehicle Unsuccessfully Returned!\n");
+        }
+    }
+
+    public void isLeasedByClient(Vehicle vehicle){
+        for(int i = 0; i < clientVehicleCount; i++){
+            if(clientVehicles[i].equals(vehicle.getPlateNumber())){
+                System.out.print(vehicle + "\nLeased by: " + clientName + "\n");
+            }
+        }
     }
 
 }
