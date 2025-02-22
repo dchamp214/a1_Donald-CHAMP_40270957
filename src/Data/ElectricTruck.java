@@ -18,7 +18,7 @@ public class ElectricTruck extends Truck{
         this.setPlateNumber(generatePlateNumber());
     }
 
-    ElectricTruck(ElectricTruck electricTruck){
+    public ElectricTruck(ElectricTruck electricTruck){
         super(electricTruck.getMake(), electricTruck.getModel(), electricTruck.getYearOfProduction(), electricTruck.getMaximumWeightCapacity());
         this.maximumRange = electricTruck.getMaximumRange();
         this.setPlateNumber(generatePlateNumber());

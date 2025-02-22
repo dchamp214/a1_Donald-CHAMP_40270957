@@ -354,16 +354,18 @@ public class Main {
 
                     switch(additionalOperationChoice){
                         case 1:
-                            // Logic for displaying the truck with the largest capacity
+                            getLargestTruck(vehicles, vehicleCount);
                             break;
                         case 2:
-                            // Logic for creating a copy of the electric trucks array
+                            ElectricTruck[] electricTruckCopy = copyVehicles(vehicles, vehicleCount);
+                            for(int i = 0; i < electricTruckCopy.length; i++){
+                                System.out.print(electricTruckCopy[i]);
+                            }
                             break;
                         default:
                             System.out.print("\nYou have made an invalid choice. Please try again");
                             break;
                     }
-
                     break;
                 default:
                     System.out.print("\nYou have made an invalid choice. Please try again");
@@ -373,5 +375,44 @@ public class Main {
         }
         while(true);
 
+    }
+
+    public static void getLargestTruck(Vehicle[] vehicles, int vehicleCount){
+        double largestCapacity = 0;
+        int index = -1;
+        for(int i = 0; i < vehicleCount; i++){
+            if(vehicles[i] instanceof DieselTruck && ((DieselTruck) vehicles[i]).getMaximumWeightCapacity() > largestCapacity){
+                largestCapacity = ((DieselTruck) vehicles[i]).getMaximumWeightCapacity();
+                index = i;
+            }
+        }
+
+        if(index == -1){
+            System.out.print("\nYou have no Diesel Trucks\n");
+        }
+        else {
+            System.out.print("\nDiesel Truck with the largest capacity\nVehicle #" + index +
+                    vehicles[index]);
+        }
+    }
+
+    public static ElectricTruck[] copyVehicles(Vehicle[] vehicles, int vehicleCount){
+        int electricTruckCount = 0;
+        for(int i = 0; i < vehicleCount; i++){
+            if(vehicles[i] instanceof ElectricTruck){
+                electricTruckCount++;
+            }
+        }
+
+        ElectricTruck[] electricTrucksCopy = new ElectricTruck[electricTruckCount];
+        int currentIndex = 0;
+
+        for(int i = 0; i < vehicleCount; i++){
+            if(vehicles[i] instanceof ElectricTruck){
+                electricTrucksCopy[currentIndex] = new ElectricTruck((ElectricTruck) vehicles[i]);
+                currentIndex++;
+            }
+        }
+        return electricTrucksCopy;
     }
 }
