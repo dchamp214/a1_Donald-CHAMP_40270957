@@ -10,10 +10,6 @@ public class Main {
         // Initialize Scanner for inputs
         Scanner input = new Scanner(System.in);
 
-        //Welcome Message
-        System.out.print("Welcome to Donald Champ's (40270957)  RoyalRentals management software!");
-
-
         // Initialize Vehicle and Client object arrays
         Vehicle[] vehicles = new Vehicle[100];
         Client[] clients = new Client[100];
@@ -22,6 +18,59 @@ public class Main {
         int vehicleCount = 0;
         int clientCount = 0;
 
+        //Welcome Message
+        System.out.print("Welcome to Donald Champ's (40270957)  RoyalRentals management software!");
+
+        // Prompt user for scenrioChoice
+        System.out.print("\nDo you want a \n\t1. Predefined Scenario\n\t2. User Interface\n-->");
+        int scenarioChoice = input.nextInt();
+
+        // Predefined scenario
+        if(scenarioChoice == 1){
+            // Diesel Trucks
+            vehicles[0] = new DieselTruck("Volvo", "FH16", 2022, 15000, 300);
+            vehicles[1] = new DieselTruck("Scania", "R 500", 2023, 18000, 350);
+            vehicles[2] = new DieselTruck("Mercedes", "Actros", 2021, 20000, 400);
+
+            // Electric Trucks
+            vehicles[3] = new ElectricTruck("Tesla", "Semi", 2022, 12000, 500);
+            vehicles[4] = new ElectricTruck("Nikola", "TRE", 2023, 14000, 550);
+            vehicles[5] = new ElectricTruck("BYD", "T8", 2024, 16000, 600);
+
+            // Gasoline Cars
+            vehicles[6] = new GasolineCar("Toyota", "Corolla", 2020, 5);
+            vehicles[7] = new GasolineCar("Honda", "Civic", 2021, 4);
+            vehicles[8] = new GasolineCar("Ford", "Focus", 2022, 4);
+
+            // Electric Cars
+            vehicles[9] = new ElectricCar("Tesla", "Model 3", 2022, 4, 400);
+            vehicles[10] = new ElectricCar("Nissan", "Leaf", 2023, 5, 450);
+            vehicles[11] = new ElectricCar("Tesla", "Model 3", 2022, 4, 400);
+
+            vehicleCount = 12;
+
+            // toString testing
+            System.out.print("toString usage" + vehicles[0]);
+
+            // equals testing
+            System.out.print("\n\nequals method testing\nFirst of different clases: " + vehicles[0].equals(vehicles[10]));
+            System.out.print("\nNext of same class, not equivalent attributes: " + vehicles[9].equals(vehicles[10]));
+            System.out.print("\nFinally, same class and same attributes: " + vehicles[9].equals(vehicles[11]));
+
+            // Create arrays for each type
+            DieselTruck[] dieselTrucks = {(DieselTruck) vehicles[0], (DieselTruck) vehicles[1], (DieselTruck) vehicles[2]};
+            ElectricTruck[] electricTrucks = {(ElectricTruck) vehicles[3], (ElectricTruck) vehicles[4], (ElectricTruck) vehicles[5]};
+            GasolineCar[] gasolineCars = {(GasolineCar) vehicles[6], (GasolineCar) vehicles[7], (GasolineCar) vehicles[8]};
+            ElectricCar[] electricCars = {(ElectricCar) vehicles[9], (ElectricCar) vehicles[10], (ElectricCar) vehicles[11]};
+
+            getLargestTruck(dieselTrucks, dieselTrucks.length);
+            ElectricTruck[] newElectricTrucks = copyVehicles(electricTrucks, electricTrucks.length);
+            return;
+
+        } else if (scenarioChoice != 2) {
+            System.out.print("Invalid Input\nGoodbye!");
+            return;
+        }
 
         // Enter menu loop
         do{
@@ -364,7 +413,7 @@ public class Main {
                     // Take user menu operation choice
                     int leasingOperationChoice = input.nextInt();
 
-
+                    // Switch for leasing operations
                     switch(leasingOperationChoice){
                         case 1:
                             System.out.print("\nHere are all your unleased vehicles:\n");
