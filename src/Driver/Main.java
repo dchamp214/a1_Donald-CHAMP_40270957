@@ -1,7 +1,7 @@
 //------------------------------------------------------------------
 // Assignment 1 - COMP249 Section U
 // Question 1/1
-// Written by: Donald Champ (40270957)
+// Written by: Donald Champ (40270957) and  Julian Vafiadis (40310616)
 //------------------------------------------------------------------
 // This program is aimed to assist RoyalRentals, a car leasing agency
 // in the program are dedicated packages for their vehicle and client data.
@@ -31,7 +31,8 @@ public class Main {
         int clientCount = 0;
 
         //Welcome Message
-        System.out.print("Welcome to Donald Champ's (40270957)  RoyalRentals management software!");
+        System.out.print("Welcome to Donald Champ (40270957) and Julian Vafiadis (" +
+                "40310616)\nRoyalRentals management software!");
 
         // Prompt user for scenarioChoice
         System.out.print("\nDo you want a \n\t1. Predefined Scenario\n\t2. User Interface\n-->");
@@ -42,12 +43,12 @@ public class Main {
             // Diesel Trucks
             vehicles[0] = new DieselTruck("Volvo", "FH16", 2022, 15000, 300);
             vehicles[1] = new DieselTruck("Scania", "R 500", 2023, 18000, 350);
-            vehicles[2] = new DieselTruck("Mercedes", "Actros", 2021, 20000, 400);
+            vehicles[2] = new DieselTruck("Mercedes", "G Wagon", 2021, 20000, 400);
 
             // Electric Trucks
             vehicles[3] = new ElectricTruck("Tesla", "Semi", 2022, 12000, 500);
             vehicles[4] = new ElectricTruck("Nikola", "TRE", 2023, 14000, 550);
-            vehicles[5] = new ElectricTruck("BYD", "T8", 2024, 16000, 600);
+            vehicles[5] = new ElectricTruck("Ford", "F-150 Lightning", 2024, 16000, 600);
 
             // Gasoline Cars
             vehicles[6] = new GasolineCar("Toyota", "Corolla", 2020, 5);
@@ -55,9 +56,9 @@ public class Main {
             vehicles[8] = new GasolineCar("Ford", "Focus", 2022, 4);
 
             // Electric Cars
-            vehicles[9] = new ElectricCar("Tesla", "Model 3", 2022, 4, 400);
-            vehicles[10] = new ElectricCar("Nissan", "Leaf", 2023, 5, 450);
-            vehicles[11] = new ElectricCar("Tesla", "Model 3", 2022, 4, 400);
+            vehicles[9] = new ElectricCar("Tesla", "Model X", 2022, 4, 400);
+            vehicles[10] = new ElectricCar("Nissan", "Rogue", 2023, 5, 450);
+            vehicles[11] = new ElectricCar("Tesla", "Model X", 2022, 4, 400);
 
 
             // toString testing
