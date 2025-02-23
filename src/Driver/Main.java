@@ -1,3 +1,15 @@
+//------------------------------------------------------------------
+// Assignment 1 - COMP249 Section U
+// Question 1/1
+// Written by: Donald Champ (40270957)
+//------------------------------------------------------------------
+// This program is aimed to assist RoyalRentals, a car leasing agency
+// in the program are dedicated packages for their vehicle and client data.
+// The Vehicle class has 2 levels of subclasses with dedicated attributes to
+// ensure all information is available. Functionality including vehicle, client and leasing
+// management have all been added to assist in database management. The program also has a
+// predefined scenario to show off functionality and can be used as a demo.
+//--------------------------------------------------------------------
 package Driver;
 
 
@@ -21,7 +33,7 @@ public class Main {
         //Welcome Message
         System.out.print("Welcome to Donald Champ's (40270957)  RoyalRentals management software!");
 
-        // Prompt user for scenrioChoice
+        // Prompt user for scenarioChoice
         System.out.print("\nDo you want a \n\t1. Predefined Scenario\n\t2. User Interface\n-->");
         int scenarioChoice = input.nextInt();
 
@@ -47,7 +59,6 @@ public class Main {
             vehicles[10] = new ElectricCar("Nissan", "Leaf", 2023, 5, 450);
             vehicles[11] = new ElectricCar("Tesla", "Model 3", 2022, 4, 400);
 
-            vehicleCount = 12;
 
             // toString testing
             System.out.print("toString usage" + vehicles[0]);
@@ -63,8 +74,12 @@ public class Main {
             GasolineCar[] gasolineCars = {(GasolineCar) vehicles[6], (GasolineCar) vehicles[7], (GasolineCar) vehicles[8]};
             ElectricCar[] electricCars = {(ElectricCar) vehicles[9], (ElectricCar) vehicles[10], (ElectricCar) vehicles[11]};
 
+            // Test main methods
             getLargestTruck(dieselTrucks, dieselTrucks.length);
             ElectricTruck[] newElectricTrucks = copyVehicles(electricTrucks, electricTrucks.length);
+            for(int i = 0; i < newElectricTrucks.length; i++){
+                System.out.print("\n\nCopied ElectricTrucks: \n" + newElectricTrucks[i]);
+            }
             return;
 
         } else if (scenarioChoice != 2) {
@@ -415,162 +430,223 @@ public class Main {
 
                     // Switch for leasing operations
                     switch(leasingOperationChoice){
+                        // Case for leasing out vehicles
                         case 1:
+                            // Displays all unleased vehicles
                             System.out.print("\nHere are all your unleased vehicles:\n");
 
+                            // Cycles through all vehicles only displaying if unleased
                             for(int i = 0; i < vehicleCount; i++){
                                 if(vehicles[i].isLeased() == false){
                                     System.out.print("Vehicle " + (i+1) + vehicles[i] + "\n");
                                 }
                             }
 
+                            // Prompt user for vehicle to be leased
                             System.out.print("Which vehicle do you want to lease?\n-->");
                             int leasedVehicle = input.nextInt() - 1;
 
+                            // Exit switch if vehicle doesn't exist
                             if(leasedVehicle >= vehicleCount || leasedVehicle < 0){
                                 System.out.print("\nVehicle does not exist");
                                 break;
                             }
 
+                            //  Inform user if vehicle is already leased
                             if(vehicles[leasedVehicle].isLeased()){
                                 System.out.print("\nThis vehicle has already been leased");
+                                break;
                             }
 
+                            // Displays all clients
                             System.out.print("Please see all clients below\n");
                             for(int i = 0; i < clientCount; i++){
                                 System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
                             }
 
+                            // Prompt user for leasing client
                             System.out.print("Enter the number of the client you wish to lease to\n-->");
                             int leaserClient = input.nextInt() - 1;
 
+                            // Exit switch if selected client doesn't exist
                             if(leaserClient >= clientCount || leaserClient < 0){
                                 System.out.print("\nClient does not exist");
                                 break;
                             }
 
+                            // Uses client addVehicle method to lease vehicle
                             clients[leaserClient].addVehicle(vehicles[leasedVehicle]);
                             vehicles[leasedVehicle].setLeased(true);
                             System.out.print("\nVehicle Successfully Leased!");
                             break;
+                        // Case for returning a vehicle
                         case 2:
+                            // Displays all clients to user
                             System.out.print("Please see all clients below\n");
                             for(int i = 0; i < clientCount; i++){
                                 System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
                             }
+
+                            // Prompts user for which client they wish to return a vehicle from
                             System.out.print("Which client wants to return a vehicle\n-->");
                             int returningClient = input.nextInt() - 1;
 
+                            // Exits switch if client does not exist
                             if(returningClient >= clientCount || returningClient < 0){
                                 System.out.print("\nClient does not exist");
                                 break;
                             }
 
+                            // Exits switch if client does not have any vehicles leased
                             if(clients[returningClient].getClientVehicleCount() == 0){
                                 System.out.print("\nThis client has no vehicles leased");
                                 break;
                             }
 
+                            // Displays all vehicles leased by selected client
                             System.out.print(clients[returningClient].clientVehiclesList(vehicles, vehicleCount));
+
+                            // Prompts user for vehicle to return
                             System.out.print("\nEnter the vehicle number that you wish to remove\n-->");
                             int returnedVehicle = input.nextInt() - 1;
+
+                            // Uses client removeVehicle method to remove vehicle from Client object
                             clients[returningClient].removeVehicle(returnedVehicle);
+
+                            // Sets selected vehicle isLeased status to false
                             vehicles[returnedVehicle].setLeased(false);
                             break;
+                        // Case for viewing all vehicles leased by a client
                         case 3:
+
+                            // Displays all clients to user
                             System.out.print("Please see all clients below\n");
                             for(int i = 0; i < clientCount; i++){
                                 System.out.print("Client #" + (i + 1) + "\n" + clients[i] + "\n\n");
                             }
 
+                            // Prompts user for client they wish to view leased vehicles of
                             System.out.print("Which client's vehicles do you wish to view\n-->");
                             int viewedClient = input.nextInt() - 1;
 
+                            // Uses Client object clientVehiclesList method to display all vehicles leased
+                            // by selected client
                             System.out.print(clients[viewedClient].clientVehiclesList(vehicles, vehicleCount));
                             break;
+                        // Case for displaying all leased vehicles and associated client
                         case 4:
+                            // for loop cycles through index of all vehicles
                             for(int i = 0; i < vehicleCount; i++){
+                                // if current index vehicle is leased statement is entered
                                 if(vehicles[i].isLeased()){
+                                    // Cycles through index of all clients
                                     for(int j = 0; j < clientCount; j++){
+                                        // isLeasedByClient method is used to check if current indexed client
+                                        // has leased current indexed vehicle, if so displays to user
                                         clients[j].isLeasedByClient(vehicles[i]);
                                     }
                                 }
                             }
                             break;
+                        // default case for invalid user inputs
                         default:
                             System.out.print("\nYou have made an invalid choice. Please try again");
                             break;
                     }
-
                     break;
+                // Case for additional operations
                 case 4:
+                    // Displays operations to user
                     System.out.print("Which Additional Operation do you wish to use\n");
                     System.out.print("\t1. Display the truck with the largest capacity\n");
                     System.out.print("\t2. Create a copy of the electric trucks array\n -->");
 
+                    // Prompts user for operationChoice
                     int additionalOperationChoice = input.nextInt();
 
+                    // Switch for differentiating operations
                     switch(additionalOperationChoice){
+                        // Case for getting the largest truck
                         case 1:
+                            // Call special main method getLargestTruck
                             getLargestTruck(vehicles, vehicleCount);
                             break;
+                        // Case for creating a copy array
                         case 2:
+                            // Creates a ElectricTruck array from array of all vehicles then displays
+                            // all ElectricTrucks to prove functionality
                             ElectricTruck[] electricTruckCopy = copyVehicles(vehicles, vehicleCount);
                             for(int i = 0; i < electricTruckCopy.length; i++){
                                 System.out.print(electricTruckCopy[i]);
                             }
                             break;
+                        // default statement for invalid user inputs
                         default:
                             System.out.print("\nYou have made an invalid choice. Please try again");
                             break;
                     }
                     break;
+                // default statement for invalid user inputs
                 default:
                     System.out.print("\nYou have made an invalid choice. Please try again");
                     break;
             }
 
-        }
+        } // end of while loop used for the menu
         while(true);
 
     }
 
+    // Special operation getLargestTruck takes a vehicles array and its count
+    // then displays the truck with the largestCapacity
     public static void getLargestTruck(Vehicle[] vehicles, int vehicleCount){
         double largestCapacity = 0;
         int index = -1;
+        // Cycles through all vehicles
         for(int i = 0; i < vehicleCount; i++){
+            // if current index vehicle is a DieselTruck object and has a larger capacity than previous
+            // index and capacity is saved to compare
             if(vehicles[i] instanceof DieselTruck && ((DieselTruck) vehicles[i]).getMaximumWeightCapacity() > largestCapacity){
                 largestCapacity = ((DieselTruck) vehicles[i]).getMaximumWeightCapacity();
                 index = i;
             }
         }
 
+        // if index has not changed (no DieselTruck objects in Vehicle array) inform user
         if(index == -1){
             System.out.print("\nYou have no Diesel Trucks\n");
         }
         else {
+            // Display truck with the largest capacity
             System.out.print("\nDiesel Truck with the largest capacity\nVehicle #" + index +
                     vehicles[index]);
         }
     }
 
+    // Special method for creating a copy array of only the ElectricTruck
     public static ElectricTruck[] copyVehicles(Vehicle[] vehicles, int vehicleCount){
         int electricTruckCount = 0;
+        // First cycles through vehicles to determine how many ElectricTrucks there are
         for(int i = 0; i < vehicleCount; i++){
             if(vehicles[i] instanceof ElectricTruck){
                 electricTruckCount++;
             }
         }
 
+        // Creates the array at the determined length
         ElectricTruck[] electricTrucksCopy = new ElectricTruck[electricTruckCount];
         int currentIndex = 0;
 
+        // Cycles back through the vehicles adding the ElectricTrucks to the array
         for(int i = 0; i < vehicleCount; i++){
             if(vehicles[i] instanceof ElectricTruck){
                 electricTrucksCopy[currentIndex] = new ElectricTruck((ElectricTruck) vehicles[i]);
+
+                // Increment index up
                 currentIndex++;
             }
         }
+        // Returns the array
         return electricTrucksCopy;
     }
 }
